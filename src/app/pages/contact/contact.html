@@ -1,0 +1,88 @@
+<section id="contact" class="bg-white px-6 py-16 md:px-12">
+  <div class="mx-auto max-w-5xl">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <p class="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-gray-500">
+        Contact
+      </p>
+
+      <h2 class="text-3xl font-semibold tracking-tight text-black md:text-4xl">
+        Hablemos.
+      </h2>
+
+      <p class="mt-3 max-w-lg text-base leading-7 text-gray-500">
+        Cuéntanos sobre tu proyecto, una idea o cualquier pregunta.
+      </p>
+    </div>
+
+    <!-- Content -->
+    <div class="grid gap-12 md:grid-cols-2 md:items-start">
+
+      <!-- Information -->
+      <div>
+        <p class="max-w-md text-base leading-7 text-gray-700">
+          Nos interesa conocer lo que estás construyendo y encontrar
+          soluciones simples para problemas reales.
+        </p>
+
+        <div class="mt-8 border-t border-gray-200 pt-6">
+          <p class="text-xs font-medium uppercase tracking-[0.15em] text-gray-400">
+            Email
+          </p>
+
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form class="space-y-6" onsubmit="event.preventDefault();">
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-gray-700">
+            Nombre
+          </label>
+
+          <input
+            type="text"
+            placeholder="Tu nombre"
+            class="w-full border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"
+          />
+        </div>
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-gray-700">
+            Correo electrónico
+          </label>
+
+          <input
+            type="email"
+            placeholder="tu@correo.com"
+            class="w-full border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"
+          />
+        </div>
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-gray-700">
+            Mensaje
+          </label>
+
+          <textarea
+            rows="5"
+            placeholder="Escribe tu mensaje..."
+            class="w-full resize-none border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="bg-black px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
+        >
+          Enviar mensaje
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
