@@ -1,0 +1,10 @@
+<button [type]="buttonType()" [disabled]="isDisabled()" [class]="computedClasses()">
+
+  @if (hasIcon()) {
+  <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="iconPath()"></path>
+  </svg>
+  }
+
+  {{ config().label }}
+</button>

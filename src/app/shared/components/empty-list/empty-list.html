@@ -1,0 +1,15 @@
+<div
+  class="empty-state group col-span-full flex min-h-80 w-full flex-col items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-white p-12 text-center transition-all duration-700 ease-out hover:border-gray-400 hover:bg-[#fdfcfa]">
+
+  <div
+    class="empty-icon mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#f8f7f4] text-gray-500 shadow-sm transition-all duration-700 ease-out group-hover:scale-105 group-hover:shadow-md">
+    <svg class="h-7 w-7 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:-rotate-6"
+      fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+    </svg>
+  </div>
+
+  <h3 class="empty-title text-lg font-semibold tracking-tight text-black">{{ title() }}</h3>
+  <p class="empty-desc mx-auto mt-2 max-w-md text-sm leading-relaxed text-gray-500">{{ description() }}</p>
+</div>

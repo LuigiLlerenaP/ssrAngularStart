@@ -1,0 +1,29 @@
+<div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+  <div>
+    <!-- Overline -->
+    @if (pageHeaderConfig().overline) {
+    <p class="mb-1 text-xs font-medium uppercase tracking-[0.2em] text-gray-500">
+      {{ pageHeaderConfig().overline }}
+    </p>
+    }
+
+    <!-- Title -->
+    <h1 class="text-3xl font-semibold tracking-tight text-black md:text-4xl">
+      {{ pageHeaderConfig().title }}
+    </h1>
+
+    <!-- Description -->
+    @if (pageHeaderConfig().description) {
+    <p class="mt-1 text-sm text-gray-500">
+      {{ pageHeaderConfig().description }}
+    </p>
+    }
+  </div>
+
+
+  @if (pageHeaderConfig().primaryAction; as config) {
+  <custom-button [config]="config" />
+  }
+
+</div>

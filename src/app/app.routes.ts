@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'about',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'about',
@@ -19,7 +19,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contact/contact'),
   },
   {
+    path: 'pokemons',
+    loadComponent: () => import('./pages/pokemons/pokemons'),
+  },
+  {
     path: '**',
-    redirectTo: (()=> 'about'),
+    redirectTo: () => 'about',
   },
 ];

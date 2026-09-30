@@ -1,0 +1,25 @@
+<div class="mt-12 flex flex-col items-center justify-between border-t border-gray-200 pt-6 sm:flex-row">
+
+  <!-- Información de página -->
+  <p class="text-sm text-gray-500">
+    Página actual:
+    <span class="font-medium text-black">
+      {{ currentPage() }} de {{ totalPages() }}
+    </span>
+  </p>
+
+  <!-- Controles -->
+  <div class="mt-4 flex items-center gap-3 sm:mt-0">
+    <custom-button [config]="prevButtonConfig" />
+
+    <!-- Texto central opcional protegido por @if -->
+    @if (paginationConfig().helperText) {
+    <span class="px-2 text-xs font-medium uppercase tracking-widest text-gray-400">
+      {{ paginationConfig().helperText |uppercase}}
+    </span>
+    }
+
+    <custom-button [config]="nextButtonConfig" />
+  </div>
+
+</div>

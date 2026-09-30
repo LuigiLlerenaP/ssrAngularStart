@@ -1,0 +1,10 @@
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+  @for (pokemon of pokemons(); track pokemon.id) {
+  <pokemon-card [pokemon]="pokemon" />
+  } @empty {
+  <empty-list class="col-span-full" title="No Pokemons found"
+    description="There are no available Pokemons to display at the moment." />
+  }
+
+</div>

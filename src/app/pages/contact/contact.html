@@ -30,7 +30,10 @@
           <p class="text-xs font-medium uppercase tracking-[0.15em] text-gray-400">
             Email
           </p>
-
+          <a href="mailto:hola@tudominio.com"
+            class="mt-1 inline-block text-base font-medium text-black hover:underline">
+            hola@tudominio.com
+          </a>
         </div>
       </div>
 
@@ -38,45 +41,30 @@
       <form class="space-y-6" onsubmit="event.preventDefault();">
 
         <div>
-          <label class="mb-2 block text-sm font-medium text-gray-700">
+          <label for="name" class="mb-2 block text-sm font-medium text-gray-700">
             Nombre
           </label>
-
-          <input
-            type="text"
-            placeholder="Tu nombre"
-            class="w-full border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"
-          />
+          <input id="name" type="text" placeholder="Tu nombre"
+            class="w-full border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black" />
         </div>
 
         <div>
-          <label class="mb-2 block text-sm font-medium text-gray-700">
+          <label for="email" class="mb-2 block text-sm font-medium text-gray-700">
             Correo electrónico
           </label>
-
-          <input
-            type="email"
-            placeholder="tu@correo.com"
-            class="w-full border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"
-          />
+          <input id="email" type="email" placeholder="tu@correo.com"
+            class="w-full border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black" />
         </div>
 
         <div>
-          <label class="mb-2 block text-sm font-medium text-gray-700">
+          <label for="message" class="mb-2 block text-sm font-medium text-gray-700">
             Mensaje
           </label>
-
-          <textarea
-            rows="5"
-            placeholder="Escribe tu mensaje..."
-            class="w-full resize-none border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"
-          ></textarea>
+          <textarea id="message" rows="5" placeholder="Escribe tu mensaje..."
+            class="w-full resize-none border border-gray-200 bg-[#f8f7f4] px-4 py-3 text-sm text-black placeholder:text-gray-400 outline-none transition focus:border-black"></textarea>
         </div>
 
-        <button
-          type="submit"
-          class="bg-black px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
-        >
+        <button type="submit" class="bg-black px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800">
           Enviar mensaje
         </button>
 
