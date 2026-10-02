@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { CustomButton } from '../custom-button/custom-button';
 import type { ButtonConfig, PaginationConfig } from '../../contracts/types';
 import { UpperCasePipe } from '@angular/common';
@@ -27,4 +27,7 @@ export class Pagination {
     type: 'button',
     customClasses: this.paginationButtonClasses,
   };
+
+  clickPrev = output<void>();
+  clickNext = output<void>();
 }

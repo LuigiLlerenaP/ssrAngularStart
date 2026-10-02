@@ -1,6 +1,8 @@
 import {
   ApplicationRef,
   Component,
+  computed,
+  effect,
   inject,
   input,
   OnInit,
@@ -16,7 +18,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PokemonsServices } from '../../pokemons/services/pokemons-services';
 import type { SimplePokemon } from '../../pokemons/contracts/pokemons-types';
-import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 const toNumberOrDefault = (value: string | undefined | null): number => {
   if (!value) return 1;
@@ -29,26 +33,34 @@ const toNumberOrDefault = (value: string | undefined | null): number => {
   imports: [Pagination, SkeletonCards, HeaderActions, PokemonList],
   templateUrl: './pokemons.html',
 })
-export class Pokemons implements OnInit {
+export class Pokemons {
+  // 1. INYECCIONES (Dependencias)
   private readonly pokemonsServices = inject(PokemonsServices);
-  // private readonly route = inject(ActivatedRoute);
-
-  readonly pokemons = signal<SimplePokemon[]>([]);
-
-  readonly id = input(1, { transform: toNumberOrDefault });
-  readonly offset = input(10, { transform: toNumberOrDefault });
-
+  private readonly router = inject(Router);
+  private readonly title = inject(Title);
   private readonly appRef = inject(ApplicationRef);
 
-  private readonly platformId = inject(PLATFORM_ID);
+  // 2. INPUTS (Vienen de la URL automáticamente)
+  // Cambié 'id' por 'page' porque semánticamente es una página
+  readonly page = input(1, { transform: toNumberOrDefault });
+  readonly offset = input(20, { transform: toNumberOrDefault });
 
-  protected readonly hasData = signal(false);
+  // 3. ESTADO LOCAL (Señales)
+  readonly pokemons = signal<SimplePokemon[]>([]);
+  protected readonly hasData = computed(() => this.pokemons().length > 0);
+
+  // 4. CONFIGURACIONES COMPUTADAS (Reactivas)
+  // Ahora es computed() para que cambie automáticamente cuando la URL cambia
+  protected readonly paginationConfig = computed<PaginationConfig>(() => ({
+    currentPage: this.page(),
+    totalPages: 10, // Nota: Idealmente esto debería calcularse con info del backend
+    helperText: 'Pokemon preview',
+  }));
 
   protected readonly pageHeaderConfig: PageHeaderConfig = {
     title: 'Pokémon',
     description: 'Browse and manage your collection of available Pokémon.',
     overline: 'Pokédex',
-
     primaryAction: {
       label: 'New Pokémon',
       type: 'button',
@@ -57,29 +69,48 @@ export class Pokemons implements OnInit {
     },
   };
 
-  protected readonly paginationConfig: PaginationConfig = {
-    currentPage: 1,
-    totalPages: 10,
-    helperText: 'Pokemon preview',
-  };
-
+  // 5. CONSTRUCTOR & EFECTOS
   constructor() {
+    // Este efecto es la magia de Angular 16+.
+    // Se ejecuta automáticamente al cargar y CADA VEZ que el input 'page()' o 'offset()' cambien.
+    effect(() => {
+      const currentPage = this.page();
+      const currentLimit = this.offset();
+
+      this.title.setTitle(`Pokémon - Page ${currentPage}`);
+      this.loadPokemons(currentPage, currentLimit);
+    });
+
+    // Tu código de monitoreo estable
     this.appRef.isStable.pipe(takeUntilDestroyed()).subscribe((isStable) => {
-      console.log('¿Aplicación estable?:', isStable);
+      // console.log('¿Aplicación estable?:', isStable);
     });
   }
 
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadPokemons(1);
-      setTimeout(() => {
-        this.hasData.set(true);
-      }, 6500);
-    }
+  // 6. LÓGICA DE NEGOCIO (Métodos Privados)
+  private loadPokemons(page: number, limit: number) {
+    this.pokemonsServices.loadPage(page, limit).subscribe((data) => this.pokemons.set(data));
+    // Ya no necesitamos el 'tap' para el router aquí.
   }
 
-  loadPokemons(page: number, nextPage: number = 20) {
-    this.pokemonsServices.loadPage(page, nextPage).subscribe(this.pokemons.set);
+  // 7. ACCIONES DE LA VISTA (Manejadores de Eventos)
+  protected handleNextClick() {
+    // Solo cambiamos la URL. El 'effect()' de arriba detectará el cambio y cargará los datos.
+    this.router.navigate([], {
+      queryParams: { page: this.page() + 1 },
+      queryParamsHandling: 'merge', // Mantiene otros parámetros si existieran
+    });
+  }
+
+  protected handlePreviousClick() {
+    const prevPage = this.page() - 1;
+    if (prevPage > 0) {
+      // Evitamos navegar a la página 0 o negativas
+      this.router.navigate([], {
+        queryParams: { page: prevPage },
+        queryParamsHandling: 'merge',
+      });
+    }
   }
 }
 

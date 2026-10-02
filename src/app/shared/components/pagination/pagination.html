@@ -10,16 +10,20 @@
 
   <!-- Controles -->
   <div class="mt-4 flex items-center gap-3 sm:mt-0">
-    <custom-button [config]="prevButtonConfig" />
+
+    <!-- Botón Anterior -->
+    <custom-button [config]="prevButtonConfig" (click)="clickPrev.emit()" />
 
     <!-- Texto central opcional protegido por @if -->
     @if (paginationConfig().helperText) {
-    <span class="px-2 text-xs font-medium uppercase tracking-widest text-gray-400">
+    <span class="px-2 text-xs font-medium tracking-widest text-gray-400">
       {{ paginationConfig().helperText |uppercase}}
     </span>
     }
 
-    <custom-button [config]="nextButtonConfig" />
+    <!-- Botón Siguiente -->
+    <custom-button [config]="nextButtonConfig" (click)="clickNext.emit()" />
+
   </div>
 
 </div>

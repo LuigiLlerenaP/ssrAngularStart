@@ -1,6 +1,6 @@
-<p>Pokémon ID: {{ id() }}</p>
 <section class="min-h-screen bg-[#f8f7f4] px-6 py-12 md:px-12">
   <div class="mx-auto max-w-6xl">
+
     <!-- Header & Actions -->
     <app-header-actions [pageHeaderConfig]="pageHeaderConfig" />
 
@@ -9,7 +9,10 @@
     } @else {
     <pokemon-list [pokemons]="pokemons()" />
     }
-    <!-- Paginación y Preview Info (Page actual) -->
-    <app-pagination [paginationConfig]="paginationConfig" />
+
+    <!-- Paginación -->
+    <app-pagination [paginationConfig]="paginationConfig()" (clickPrev)="handlePreviousClick()"
+      (clickNext)="handleNextClick()" />
+
   </div>
 </section>
