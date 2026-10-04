@@ -1,7 +1,11 @@
-export type Pokemon = {
+export type PokemonType = {
   id: string;
   name: string;
-  image: string;
+  imageUrl: string;
+  weight: number;
+  height: number;
+  types: string[];
+  abilities: string[];
 };
 
-export type SimplePokemon = Pick<Pokemon, 'id' | 'name'>;
+export type SimplePokemon = Pick<PokemonType, 'id' | 'name'>;

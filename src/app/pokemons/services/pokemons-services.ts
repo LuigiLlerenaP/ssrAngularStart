@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { SimplePokemon } from '../contracts/pokemons-types';
-import { map, Observable, tap } from 'rxjs';
-import { PokemonAPIResponse } from '../contracts/pokemon-api';
+import { map, Observable } from 'rxjs';
+import { mapPokemon } from '../mapping/pokemon-mapping';
+import { PokemonAPIResponse, PokemonCharacterAPIResponse } from '../contracts/pokemon-api';
+import type { PokemonType, SimplePokemon } from '../contracts/pokemons-types';
 
 @Service()
 export class PokemonsServices {
@@ -31,5 +32,10 @@ export class PokemonsServices {
           return simplePokemons;
         }),
       );
+  }
+  public loadPokemon(id: string): Observable<PokemonType> {
+    return this.http
+      .get<PokemonCharacterAPIResponse>(`${environment.pokemonApiUrl}pokemon/${id}`)
+      .pipe(map(mapPokemon));
   }
 }
