@@ -13,11 +13,10 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-    "architect": {
+"architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "prerender": false,
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -28,6 +27,7 @@
             ],
             "styles": ["src/styles.css"],
             "server": "src/main.server.ts",
+            "outputMode": "server",
             "security": {
               "allowedHosts": []
             },
